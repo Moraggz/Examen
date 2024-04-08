@@ -1,7 +1,7 @@
 package examen3;
 import java.util.ArrayList;
 
-public class MicroRaton {
+public class Raton {
 	public static void main(String[] args) {
 		
         char[][] laberinto={
@@ -27,7 +27,7 @@ public class MicroRaton {
         	{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
         };
 
-        MicroRaton raton= new MicroRaton(laberinto);
+        Raton raton= new Raton(laberinto);
         ArrayList<String> ruta= raton.encontrarRuta();
         System.out.println("Movimientos: "+ruta);
     }
@@ -37,7 +37,7 @@ public class MicroRaton {
     private int columnas;
     private ArrayList<String> movimientos;
 
-    public MicroRaton(char[][] laberinto) {
+    public Raton(char[][] laberinto) {
         this.laberinto = laberinto;
         this.filas = laberinto.length;
         this.columnas = laberinto[0].length;
