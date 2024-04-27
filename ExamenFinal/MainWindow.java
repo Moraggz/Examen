@@ -59,7 +59,7 @@ public class MainWindow extends JFrame implements Serializable {
 
     private void saveCanvasImage() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Save Image");
+        fileChooser.setDialogTitle("Guardar Imagen");
         int userSelection = fileChooser.showSaveDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
@@ -67,14 +67,14 @@ public class MainWindow extends JFrame implements Serializable {
                 FileHandler.saveImage(canvasPanel.getCanvasImage(), fileToSave);
             } catch (IOException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error saving image", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error guardando imagen", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     private void loadCanvasImage() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Load Image");
+        fileChooser.setDialogTitle("Cargar Imagen");
         int userSelection = fileChooser.showOpenDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToLoad = fileChooser.getSelectedFile();
@@ -83,7 +83,7 @@ public class MainWindow extends JFrame implements Serializable {
                 canvasPanel.setCanvasImage(loadedImage);
             } catch (IOException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error loading image", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error cargando imagen", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
