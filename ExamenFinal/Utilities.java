@@ -1,7 +1,6 @@
 package examenFinal;
 import java.awt.*;
 
-
 class Utilities {
     public static Point calculateGridPosition(Point mousePoint) {
         int cellSize = 10;
