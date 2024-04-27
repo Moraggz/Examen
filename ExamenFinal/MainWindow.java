@@ -50,14 +50,12 @@ public class MainWindow extends JFrame implements Serializable {
     }
 
     private void initializeComponents() {
-        // Initialize any additional components if necessary
     }
 
     private void registerListeners() {
         colorPickerPanel.addColorSelectionListener(new ColorPickerPanel.ColorSelectionListener() {
             @Override
             public void colorSelected(Color color) {
-                // Update the currently selected color on the canvas panel
                 canvasPanel.setCurrentColor(color);
             }
         });
