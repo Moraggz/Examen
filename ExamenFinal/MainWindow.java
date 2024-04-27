@@ -13,7 +13,7 @@ public class MainWindow extends JFrame implements Serializable {
     private JTextField gridSizeTextField;
 
     public MainWindow() {
-        setTitle("Pixel Art Creator");
+        setTitle("Creador Pixel Art");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setupLayout();
