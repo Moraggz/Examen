@@ -10,15 +10,11 @@ public class MainWindow extends JFrame implements Serializable {
     private static final long serialVersionUID = 1L;
     private CanvasPanel canvasPanel;
     private ColorPickerPanel colorPickerPanel;
-    //private ImageModel imageModel;
 
     public MainWindow() {
         setTitle("Pixel Art Creator");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //imageModel = new ImageModel(50, 50);
-
         setupLayout();
         initializeComponents();
         registerListeners();
