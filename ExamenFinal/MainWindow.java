@@ -10,6 +10,7 @@ public class MainWindow extends JFrame implements Serializable {
     private static final long serialVersionUID = 1L;
     private CanvasPanel canvasPanel;
     private ColorPickerPanel colorPickerPanel;
+    private JTextField gridSizeTextField;
 
     public MainWindow() {
         setTitle("Pixel Art Creator");
@@ -43,6 +44,15 @@ public class MainWindow extends JFrame implements Serializable {
 
         colorPickerPanel = new ColorPickerPanel();
         add(colorPickerPanel, BorderLayout.EAST);
+        
+        JPanel customizationPanel = new JPanel();
+        customizationPanel.setLayout(new GridLayout(0, 2));
+
+        JLabel gridSizeLabel = new JLabel("Grid Size:");
+        gridSizeTextField = new JTextField(Integer.toString(canvasPanel.getCellSize()));
+        customizationPanel.add(gridSizeLabel);
+        customizationPanel.add(gridSizeTextField);
+        add(customizationPanel, BorderLayout.SOUTH);
     }
 
     private void initializeComponents() {
@@ -55,6 +65,15 @@ public class MainWindow extends JFrame implements Serializable {
                 canvasPanel.setCurrentColor(color);
             }
         });
+
+        gridSizeTextField.addActionListener(e -> {
+            try {
+                int newSize = Integer.parseInt(gridSizeTextField.getText());
+                canvasPanel.setCellSize(newSize);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Tamaño de pixel invalido", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });       
     }
 
     private void saveCanvasImage() {
@@ -74,7 +93,7 @@ public class MainWindow extends JFrame implements Serializable {
 
     private void loadCanvasImage() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Cargar Imagen");
+        fileChooser.setDialogTitle("Cargando Imagen");
         int userSelection = fileChooser.showOpenDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToLoad = fileChooser.getSelectedFile();
