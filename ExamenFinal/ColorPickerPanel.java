@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
-
 public class ColorPickerPanel extends JPanel implements Serializable {
     private static final long serialVersionUID = 1L;
     private ColorSelectionListener colorSelectionListener;
