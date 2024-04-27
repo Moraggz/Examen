@@ -18,9 +18,9 @@ class CanvasPanel extends JPanel implements Serializable {
     private int cellSize = 10;
 
     public CanvasPanel() {
-        setPreferredSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(1800, 1000));
         setBackground(Color.WHITE);
-        canvasImage = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
+        canvasImage = new BufferedImage(1800, 1000, BufferedImage.TYPE_INT_ARGB);
         graphics = canvasImage.createGraphics();
         clearCanvas();
         currentColor = Color.BLACK;
@@ -29,8 +29,10 @@ class CanvasPanel extends JPanel implements Serializable {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int x = e.getX() / cellSize;
-                int y = e.getY() / cellSize;
+                Point mousePoint = e.getPoint();
+                Point gridPosition = Utilities.calculateGridPosition(mousePoint, cellSize);
+                int x = gridPosition.x;
+                int y = gridPosition.y;
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     graphics.setColor(currentColor);
                     graphics.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
@@ -41,36 +43,7 @@ class CanvasPanel extends JPanel implements Serializable {
                 repaint();
             }
         });
-        saveMenuItem.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar imagen");
-            int userSelection = fileChooser.showSaveDialog(null);
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToSave = fileChooser.getSelectedFile();
-                try {
-                    FileHandler.saveImage(canvasImage, fileToSave);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al guardar la imagen", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        loadMenuItem.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Cargar imagen");
-            int userSelection = fileChooser.showOpenDialog(null);
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToLoad = fileChooser.getSelectedFile();
-                try {
-                    BufferedImage loadedImage = FileHandler.loadImage(fileToLoad);
-                    setCanvasImage(loadedImage);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al cargar la imagen", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
+        
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -154,5 +127,14 @@ class CanvasPanel extends JPanel implements Serializable {
 
     public JMenuBar getMenuBarContainer() {
         return menuBarContainer;
+    }
+
+    public int getCellSize() {
+        return cellSize;
+    }
+
+    public void setCellSize(int cellSize) {
+        this.cellSize = cellSize;
+        repaint();
     }
 }
